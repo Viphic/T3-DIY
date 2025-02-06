@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="style.css" />
+
+    <script
+      src="https://kit.fontawesome.com/3bfd3ce9e5.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <title>T3 DIY</title>
+  </head>
+  <body>
+    <main>
+      <div class="grid" data-id="grid">
+        <div class="turn-indicator" data-id="turn-indicator">
+          <i data-id="iconTurn" class="fa-solid fa-x turquoise"></i>
+          <p data-id="playerTurn" class="turquoise">Player 1, you're up!</p>
+        </div>
+        <div class="menu" data-id="menu">
+          <button class="menu-btn" data-id="menu-btn">
+            <p>Actions</p>
+            <i class="fa-solid fa-chevron-down"></i>
+          </button>
+
+          <div class="pop-out-menu hidden" data-id="pop-out-menu">
+            <button id="reset-game" data-id="reset-game">Reset</button>
+            <button id="new-round" data-id="new-round">New round</button>
+          </div>
+        </div>
+        <div data-id="squares" class="square shadow" id="1"></div>
+        <div data-id="squares" class="square shadow" id="2"></div>
+        <div data-id="squares" class="square shadow" id="3"></div>
+        <div data-id="squares" class="square shadow" id="4"></div>
+        <div data-id="squares" class="square shadow" id="5"></div>
+        <div data-id="squares" class="square shadow" id="6"></div>
+        <div data-id="squares" class="square shadow" id="7"></div>
+        <div data-id="squares" class="square shadow" id="8"></div>
+        <div data-id="squares" class="square shadow" id="9"></div>
+        <div class="scoreboard" id="p1-stats">
+          <p class="name-scoreboard" id="player-1" data-id="player-1">Neuro</p>
+          <p data-id="p1-wins">0 Wins</p>
+        </div>
+        <div class="scoreboard" id="ties">
+          <p class="name-scoreboard">Ties</p>
+          <p data-id="ties">0</p>
+        </div>
+        <div class="scoreboard" id="p2-stats">
+          <p class="name-scoreboard" id="player-2" data-id="player-2">Evil</p>
+          <p data-id="p2-wins">0 Wins</p>
+        </div>
+      </div>
+    </main>
+    <div class="modal hidden" data-id="modal">
+      <div class="modal-contents">
+        <p data-id="winner">Player 1 wins!</p>
+        <button data-id="modal-btn">Play again</button>
+      </div>
+    </div>
+    <div
+      class="character-selection-screen hidden"
+      data-id="character-selection-screen"
+    >
+      <div class="character-selection-square">
+        <div class="players-without-button">
+          <div class="p1-square" data-id="p1-selection">
+            <div class="p1-current-character" data-id="p1-current-character">
+              <img
+                src="https://pygmalion.chat/_next/image?url=https%3A%2F%2Fassets.pygmalion.chat%2F5c0e12c7-5e5a-4e12-b19e-ecb8b4a0f439&w=1080&q=75"
+                alt=""
+              />
+              <p>Neuro</p>
+            </div>
+            <ul class="p1-character-menu hidden" data-id="p1-character-menu">
+              <li
+                id="neuro-1"
+                data-id="p1-list-item"
+                data-character-name="Neuro"
+              >
+                <img
+                  src="https://pygmalion.chat/_next/image?url=https%3A%2F%2Fassets.pygmalion.chat%2F5c0e12c7-5e5a-4e12-b19e-ecb8b4a0f439&w=1080&q=75"
+                  alt="Picture of Neuro-Sama"
+                />
+                <p>Neuro</p>
+              </li>
+              <li
+                id="evil-2-1"
+                data-id="p1-list-item"
+                data-character-name="Evil"
+              >
+                <img
+                  src="https://i1.sndcdn.com/artworks-MzzrGzNWw7qGVnlz-dzYyMQ-t500x500.jpg"
+                  alt="Picture of Evil"
+                />
+                <p>Evil</p>
+              </li>
+              <li
+                id="vedal-1"
+                data-id="p1-list-item"
+                data-character-name="Vedal"
+              >
+                <img
+                  src="https://vtubie.com/wp-content/uploads/2024/02/21a44021658e45f6bb9f4d7649474e48.png"
+                  alt="Picture of Vedal"
+                />
+                <p>Vedal</p>
+              </li>
+              <li id="anny-1" data-id="p1-list-item" data-character-name="Anny">
+                <img
+                  src="https://pbs.twimg.com/profile_images/1597548206443098112/vR4JnZF5_400x400.jpg"
+                  alt="Picture of Anny"
+                />
+                <p>Anny</p>
+              </li>
+              <li
+                id="camila-1"
+                data-id="p1-list-item"
+                data-character-name="Camila"
+              >
+                <img
+                  src="https://i.pinimg.com/736x/16/a1/ca/16a1cad2db00d6fa920c6781c7139c5a.jpg"
+                  alt="Picture of Camila"
+                />
+                <p>Camila</p>
+              </li>
+              <li id="mini-1" data-id="p1-list-item" data-character-name="Mini">
+                <img
+                  src="https://pbs.twimg.com/media/GUgE6PXXgAAhDaT.png"
+                  alt="Picture of Mini"
+                />
+                <p>Mini</p>
+              </li>
+              <li
+                id="layna-1"
+                data-id="p1-list-item"
+                data-character-name="Layna"
+              >
+                <img
+                  src="https://pbs.twimg.com/media/GU-HXTFa4AQIwW2.jpg"
+                  alt="Picture of Layna"
+                />
+                <p>Layna</p>
+              </li>
+              <li
+                id="ellie-1"
+                data-id="p1-list-item"
+                data-character-name="Ellie"
+              >
+                <img
+                  src="https://yt3.googleusercontent.com/d0-YjhTo-NeGb5TK5KR0bzxOmJqvWHC4S_pTMc-hs7E5UvOV5zFTT6NEF3F-bnab5mVQOkkDig=s900-c-k-c0x00ffffff-no-rj"
+                  alt="Picture of Ellie"
+                />
+                <p>Ellie</p>
+              </li>
+              <li
+                id="kokoD-1"
+                data-id="p1-list-item"
+                data-character-name="Koko"
+              >
+                <img
+                  src="https://media.tenor.com/lv4NWvlPZBkAAAAe/kokonuts-succ.png"
+                  alt="Picture of KokoD"
+                />
+                <p>Koko</p>
+              </li>
+              <li id="toma-1" data-id="p1-list-item" data-character-name="Toma">
+                <img
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDDRSMu36FD0xqqCmje2MY8qo9N_WbduFWgQ&s"
+                  alt="Picture of Toma"
+                />
+                <p>Toma</p>
+              </li>
+            </ul>
+          </div>
+          <div class="vs">
+            <i class="fa-solid fa-v"></i>
+            <i class="fa-solid fa-s"></i>
+          </div>
+          <div class="p2-square" data-id="p2-selection">
+            <div class="p2-current-character" data-id="p2-current-character">
+              <p>Evil</p>
+              <img
+                src="https://i1.sndcdn.com/artworks-MzzrGzNWw7qGVnlz-dzYyMQ-t500x500.jpg"
+                alt=""
+              />
+            </div>
+            <ul class="p2-character-menu hidden" data-id="p2-character-menu">
+              <li
+                id="neuro-2"
+                data-id="p2-list-item"
+                data-character-name="Neuro"
+              >
+                <p>Neuro</p>
+                <img
+                  src="https://pygmalion.chat/_next/image?url=https%3A%2F%2Fassets.pygmalion.chat%2F5c0e12c7-5e5a-4e12-b19e-ecb8b4a0f439&w=1080&q=75"
+                  alt="Picture of Neuro-Sama"
+                />
+              </li>
+              <li id="evil-2" data-id="p2-list-item" data-character-name="Evil">
+                <p>Evil</p>
+                <img
+                  src="https://i1.sndcdn.com/artworks-MzzrGzNWw7qGVnlz-dzYyMQ-t500x500.jpg"
+                  alt="Picture of Evil"
+                />
+              </li>
+              <li
+                id="vedal-2"
+                data-id="p2-list-item"
+                data-character-name="Vedal"
+              >
+                <p>Vedal</p>
+                <img
+                  src="https://vtubie.com/wp-content/uploads/2024/02/21a44021658e45f6bb9f4d7649474e48.png"
+                  alt="Picture of Vedal"
+                />
+              </li>
+              <li id="anny-2" data-id="p2-list-item" data-character-name="Anny">
+                <p>Anny</p>
+                <img
+                  src="https://pbs.twimg.com/profile_images/1597548206443098112/vR4JnZF5_400x400.jpg"
+                  alt="Picture of Anny"
+                />
+              </li>
+              <li
+                id="camila-2"
+                data-id="p2-list-item"
+                data-character-name="Camila"
+              >
+                <p>Camila</p>
+                <img
+                  src="https://i.pinimg.com/736x/16/a1/ca/16a1cad2db00d6fa920c6781c7139c5a.jpg"
+                  alt="Picture of Camila"
+                />
+              </li>
+              <li id="mini-2" data-id="p2-list-item" data-character-name="Mini">
+                <p>Mini</p>
+                <img
+                  src="https://pbs.twimg.com/media/GUgE6PXXgAAhDaT.png"
+                  alt="Picture of Mini"
+                />
+              </li>
+              <li
+                id="layna-2"
+                data-id="p2-list-item"
+                data-character-name="Layna"
+              >
+                <p>Layna</p>
+                <img
+                  src="https://pbs.twimg.com/media/GU-HXTFa4AQIwW2.jpg"
+                  alt="Picture of Layna"
+                />
+              </li>
+              <li
+                id="ellie-2"
+                data-id="p2-list-item"
+                data-character-name="Ellie"
+              >
+                <p>Ellie</p>
+                <img
+                  src="https://yt3.googleusercontent.com/d0-YjhTo-NeGb5TK5KR0bzxOmJqvWHC4S_pTMc-hs7E5UvOV5zFTT6NEF3F-bnab5mVQOkkDig=s900-c-k-c0x00ffffff-no-rj"
+                  alt="Picture of Ellie"
+                />
+              </li>
+              <li
+                id="kokoD-2"
+                data-id="p2-list-item"
+                data-character-name="Koko"
+              >
+                <p>Koko</p>
+                <img
+                  src="https://media.tenor.com/lv4NWvlPZBkAAAAe/kokonuts-succ.png"
+                  alt="Picture of KokoD"
+                />
+              </li>
+              <li id="toma-2" data-id="p2-list-item" data-character-name="Toma">
+                <p>Toma</p>
+                <img
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDDRSMu36FD0xqqCmje2MY8qo9N_WbduFWgQ&s"
+                  alt="Picture of Toma"
+                />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <button class="start-button" data-id="start-button">Play</button>
+      </div>
+    </div>
+    <script type="module" src="./js/app.js"></script>
+  </body>
+</html>
