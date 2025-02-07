@@ -111,12 +111,6 @@ function init() {
     store.registerMove(+square.id);
   });
 
-  view.$.startButton.addEventListener("click", (event) => {
-    view.render(store.game, store.stats);
-    view.closeSelectionScreen();
-    view.updateStatsName(players);
-  });
-
   view.$$.p1ListItem.forEach((item) => {
     item.addEventListener("click", (event) => {
       const character = characterMap.get(item.dataset.characterName);
@@ -133,6 +127,12 @@ function init() {
 
       view.updatePlayerCharacter(character, item);
     });
+  });
+
+  view.$.startButton.addEventListener("click", (event) => {
+    store.savePlayersToStorage(players);
+    view.render(store.game, store.stats);
+    view.closeSelectionScreen();
   });
 }
 

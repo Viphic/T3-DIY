@@ -28,7 +28,6 @@ export default class View {
     this.$.p2Select = this.#qs('[data-id="p2-selection"]');
     this.$.p2CharMenu = this.#qs('[data-id="p2-character-menu"]');
     this.$.startButton = this.#qs('[data-id="start-button"]');
-    this.$.startButton = this.#qs('[data-id="start-button"]');
     this.$.p1SelectedCharacter = this.#qs('[data-id="p1-current-character"]');
     this.$.p2SelectedCharacter = this.#qs('[data-id="p2-current-character"]');
 
@@ -57,6 +56,7 @@ export default class View {
       moves,
       currentPlayer,
       currentRoundGames,
+      savedPlayers,
       status: { isComplete, winner },
     } = game;
 
@@ -66,11 +66,13 @@ export default class View {
 
     this.#closeAll();
     this.#resetCurrentGameboard();
+    this.updateStatsName(savedPlayers);
     this.#updateScoreboard(
       playerWithStats[0].wins,
       playerWithStats[1].wins,
       ties
     );
+
     this.#initializeMoves(moves);
 
     if (isComplete) {
