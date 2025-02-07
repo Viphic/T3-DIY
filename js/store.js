@@ -5,12 +5,10 @@ const initialValue = {
 };
 
 export default class Store extends EventTarget {
-  #state = initialValue;
-
   constructor(key, players) {
     super();
     this.storageKey = key;
-    this.players = players;
+    this.players = this.getPlayersFromStorage(players);
   }
 
   get stats() {
@@ -35,11 +33,12 @@ export default class Store extends EventTarget {
 
   get game() {
     const state = this.#getState();
+    const savedPlayers = this.getPlayersFromStorage();
     const movesMade = state.currentGameMoves;
     const currentRoundGames = state.currentRoundGames;
     const currentPlayerIndex = movesMade.length % 2;
 
-    const currentPlayer = this.players[currentPlayerIndex];
+    const currentPlayer = savedPlayers[currentPlayerIndex];
 
     const winningPattern = [
       [1, 2, 3],
@@ -70,6 +69,7 @@ export default class Store extends EventTarget {
       moves: movesMade,
       currentRoundGames,
       currentPlayer,
+      savedPlayers,
       status: {
         isComplete: winner != null || movesMade.length === 9,
         winner,
@@ -113,6 +113,21 @@ export default class Store extends EventTarget {
     stateClone.currentRoundGames = [];
 
     this.#saveState(stateClone);
+  }
+
+  savePlayersToStorage(players) {
+    localStorage.setItem("players", JSON.stringify(players));
+  }
+
+  getPlayersFromStorage(defaultPlayers) {
+    const savedPlayers = JSON.parse(localStorage.getItem("players"));
+
+    if (savedPlayers) {
+      return savedPlayers;
+    }
+
+    localStorage.setItem("players", JSON.stringify(defaultPlayers));
+    return defaultPlayers;
   }
 
   #getState() {
