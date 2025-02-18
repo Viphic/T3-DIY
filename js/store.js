@@ -53,7 +53,7 @@ export default class Store extends EventTarget {
 
     let winner = null;
 
-    for (const player of this.players) {
+    for (const player of savedPlayers) {
       const playedSquaresId = movesMade
         .filter((move) => move.player.id === player.id)
         .map((move) => move.squareId);

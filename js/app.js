@@ -114,6 +114,15 @@ function init() {
   view.$$.p1ListItem.forEach((item) => {
     item.addEventListener("click", (event) => {
       const character = characterMap.get(item.dataset.characterName);
+      const isCharacterSelected = players.some(
+        (player) => player.name === character.name
+      );
+
+      if (isCharacterSelected) {
+        alert("Character is already selected");
+        return;
+      }
+
       players[0] = { ...players[0], ...character };
 
       view.updatePlayerCharacter(character, item);
@@ -123,6 +132,15 @@ function init() {
   view.$$.p2ListItem.forEach((item) => {
     item.addEventListener("click", (event) => {
       const character = characterMap.get(item.dataset.characterName);
+      const isCharacterSelected = players.some(
+        (player) => player.name === character.name
+      );
+
+      if (isCharacterSelected) {
+        alert("Character is already selected");
+        return;
+      }
+
       players[1] = { ...players[1], ...character };
 
       view.updatePlayerCharacter(character, item);
@@ -132,7 +150,8 @@ function init() {
   view.$.startButton.addEventListener("click", (event) => {
     store.savePlayersToStorage(players);
     view.render(store.game, store.stats);
-    view.closeSelectionScreen();
+    view.closeCharacterMenu();
+    view.closeCharacterSelectionScreen();
   });
 }
 

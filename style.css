@@ -28,15 +28,23 @@ body {
   background-color: var(--dark-gray);
 }
 
+#reset-game:hover,
+#new-round:hover {
+  text-decoration: underline;
+}
+
 button:hover,
 .square:hover {
   cursor: pointer;
   opacity: 80%;
 }
 
-#reset-game:hover,
-#new-round:hover {
-  text-decoration: underline;
+.p1-square ul:hover,
+.p2-square ul:hover,
+.menu-btn:hover,
+.pop-out-menu:hover,
+.square:hover {
+  outline: 1px solid var(--turquoise);
 }
 
 .shadow {
@@ -188,6 +196,8 @@ body {
 #reset-game,
 #new-round {
   margin: 10px 0;
+  background-color: transparent;
+  border-radius: 0;
 }
 
 .square {
@@ -260,8 +270,9 @@ Modal styles
   border-radius: 20px;
   width: 100%;
   max-width: 300px;
-  height: 150px;
+  height: 200px;
   background-color: var(--gray);
+  border: 1px solid var(--turquoise);
 
   display: flex;
   flex-direction: column;
@@ -272,6 +283,8 @@ Modal styles
 .modal-contents p {
   color: white;
   margin-bottom: 10px;
+  font-size: 1.2rem;
+  font-weight: 700;
 }
 
 .modal-contents button {
@@ -281,12 +294,6 @@ Modal styles
   padding: 10px;
   margin-top: 10px;
 }
-
-/*
-=======================
-Shared selection styles
-=======================
-*/
 
 /*
 ================
@@ -311,6 +318,8 @@ Selection Styles
   max-width: 400px;
   height: 200px;
   background-color: var(--gray);
+  border: 1px solid var(--turquoise);
+  border-radius: 20px;
 
   display: flex;
   flex-direction: column;
@@ -329,14 +338,16 @@ Selection Styles
 .p1-square,
 .p2-square {
   position: relative;
+  border-radius: 15px;
   width: 150px;
   height: 80px;
-  margin: 2px;
+  margin: 5px;
 }
 
 @keyframes border-animation {
   0% {
     outline: 1px solid var(--dark-gray);
+    outline-offset: -1px;
   }
 
   100% {
@@ -345,12 +356,12 @@ Selection Styles
   }
 }
 
-.p1-current-character:hover,
-.p2-current-character:hover {
+.p1-square:hover,
+.p2-square:hover {
   cursor: pointer;
   box-shadow: rgba(0, 0, 0, 0.4) 0 2px 4px, rgba(0, 0, 0, 0.3) 0 7px 13px -3px;
   animation-name: border-animation;
-  animation-duration: 0.5s;
+  animation-duration: 0.6s;
   animation-fill-mode: forwards;
   animation-timing-function: ease-in-out;
 }
@@ -383,11 +394,6 @@ Selection Styles
 .p1-square ul::-webkit-scrollbar,
 .p2-square ul::-webkit-scrollbar {
   display: none;
-}
-
-.p1-square ul:hover,
-.p2-square ul:hover {
-  outline: 1px solid var(--turquoise);
 }
 
 .p1-current-character,
@@ -460,7 +466,7 @@ Selection Styles
 }
 
 .start-button {
-  margin-top: 3px;
+  margin-top: -4px;
   padding: 10px 20px;
   border-radius: 5px;
   background-color: var(--turquoise);
