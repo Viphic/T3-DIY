@@ -30,6 +30,7 @@ export default class View {
     this.$.startButton = this.#qs('[data-id="start-button"]');
     this.$.p1SelectedCharacter = this.#qs('[data-id="p1-current-character"]');
     this.$.p2SelectedCharacter = this.#qs('[data-id="p2-current-character"]');
+    this.$.changeCharacterBtn = this.#qs('[data-id="change-character"]');
 
     this.$$.squares = document.querySelectorAll('[data-id="squares"]');
     this.$$.p1ListItem = document.querySelectorAll('[data-id="p1-list-item"]');
@@ -37,6 +38,11 @@ export default class View {
 
     this.$.menuBtn.addEventListener("click", (event) => {
       this.#toggleActionMenu();
+    });
+
+    this.$.changeCharacterBtn.addEventListener("click", (event) => {
+      this.#openSelectionScreen();
+      this.$.modal.classList.add("hidden");
     });
 
     this.$.p1Select.addEventListener("click", (event) => {
@@ -86,6 +92,7 @@ export default class View {
   resetGameEvent(handler) {
     this.$.resetBtn.addEventListener("click", handler);
     this.$.modalBtn.addEventListener("click", handler);
+    this.$.changeCharacterBtn.addEventListener("click", handler);
   }
 
   newRoundEvent(handler) {
@@ -169,7 +176,7 @@ export default class View {
     icon.classList.toggle("fa-chevron-up");
   }
 
-  closeSelectionScreen() {
+  closeCharacterSelectionScreen() {
     this.$.characterSelectionScreen.classList.add("hidden");
   }
 
@@ -177,9 +184,17 @@ export default class View {
     this.$.characterSelectionScreen.classList.remove("hidden");
   }
 
+  closeCharacterMenu() {
+    this.$.p1CharMenu.classList.add("hidden");
+    this.$.p1Select.classList.remove("character-selection-outline");
+
+    this.$.p2CharMenu.classList.add("hidden");
+    this.$.p2Select.classList.remove("character-selection-outline");
+  }
+
   #closeActionMenu() {
     this.$.menuHidden.classList.add("hidden");
-    this.$.menuBtn.classList.remove("border");
+    this.$.menuBtn.classList.remove("outline");
 
     const icon = this.$.menuBtn.querySelector("i");
     icon.classList.add("fa-chevron-down");
