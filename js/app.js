@@ -20,7 +20,7 @@ const characters = [
   {
     name: "Anny",
     iconClass:
-      "https://pbs.twimg.com/profile_images/1597548206443098112/vR4JnZF5_400x400.jpg",
+      "https://static-cdn.jtvnw.net/jtv_user_pictures/b1a7937e-1188-44f4-9af2-75d4361c5987-profile_image-300x300.png",
   },
   {
     name: "Camila",
@@ -150,7 +150,6 @@ function init() {
   view.$.startButton.addEventListener("click", (event) => {
     store.savePlayersToStorage(players);
     view.render(store.game, store.stats);
-    view.closeCharacterMenu();
     view.closeCharacterSelectionScreen();
   });
 }
