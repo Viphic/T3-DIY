@@ -8,7 +8,7 @@ export default class Store extends EventTarget {
   constructor(key, players) {
     super();
     this.storageKey = key;
-    this.players = this.getPlayersFromStorage(players);
+    this.players = this.#getPlayersFromStorage(players);
   }
 
   get stats() {
@@ -33,7 +33,7 @@ export default class Store extends EventTarget {
 
   get game() {
     const state = this.#getState();
-    const savedPlayers = this.getPlayersFromStorage();
+    const savedPlayers = this.#getPlayersFromStorage();
     const movesMade = state.currentGameMoves;
     const currentRoundGames = state.currentRoundGames;
     const currentPlayerIndex = movesMade.length % 2;
@@ -119,7 +119,7 @@ export default class Store extends EventTarget {
     localStorage.setItem("players", JSON.stringify(players));
   }
 
-  getPlayersFromStorage(defaultPlayers) {
+  #getPlayersFromStorage(defaultPlayers) {
     const savedPlayers = JSON.parse(localStorage.getItem("players"));
 
     if (savedPlayers) {

@@ -41,7 +41,7 @@ export default class View {
     });
 
     this.$.changeCharacterBtn.addEventListener("click", (event) => {
-      this.#openSelectionScreen();
+      this.#openCharacterSelectionScreen();
       this.$.modal.classList.add("hidden");
     });
 
@@ -67,12 +67,12 @@ export default class View {
     } = game;
 
     if (moves.length < 1 && currentRoundGames.length < 1) {
-      this.#openSelectionScreen();
+      this.#openCharacterSelectionScreen();
     }
 
     this.#closeAll();
     this.#resetCurrentGameboard();
-    this.updateStatsName(savedPlayers);
+    this.#updateStatsName(savedPlayers);
     this.#updateScoreboard(
       playerWithStats[0].wins,
       playerWithStats[1].wins,
@@ -83,6 +83,7 @@ export default class View {
 
     if (isComplete) {
       this.#openModal(winner ? `${winner.name} wins!` : "Tie game!");
+      this.#setTurnIndicator(winner ? winner : savedPlayers[0]);
       return;
     }
 
@@ -133,6 +134,7 @@ export default class View {
   #placeIconInSquare(square, player) {
     const img = document.createElement("img");
     img.src = player.iconClass;
+    img.classList.add(`outline-${player.colorClass}`);
     square.replaceChildren(img);
   }
 
@@ -141,6 +143,7 @@ export default class View {
     const label = document.createElement("p");
 
     img.src = player.iconClass;
+    img.classList.add(`outline-${player.colorClass}`);
 
     label.classList.add(player.colorClass);
     label.innerText = `${player.name}, you're up!`;
@@ -162,7 +165,7 @@ export default class View {
     }
   }
 
-  updateStatsName(players) {
+  #updateStatsName(players) {
     this.$.player1.innerText = players[0].name;
     this.$.player2.innerText = players[1].name;
   }
@@ -178,13 +181,14 @@ export default class View {
 
   closeCharacterSelectionScreen() {
     this.$.characterSelectionScreen.classList.add("hidden");
+    this.#closeCharacterMenu();
   }
 
-  #openSelectionScreen() {
+  #openCharacterSelectionScreen() {
     this.$.characterSelectionScreen.classList.remove("hidden");
   }
 
-  closeCharacterMenu() {
+  #closeCharacterMenu() {
     this.$.p1CharMenu.classList.add("hidden");
     this.$.p1Select.classList.remove("character-selection-outline");
 

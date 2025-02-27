@@ -28,11 +28,6 @@ body {
   background-color: var(--dark-gray);
 }
 
-#reset-game:hover,
-#new-round:hover {
-  text-decoration: underline;
-}
-
 button:hover,
 .square:hover {
   cursor: pointer;
@@ -73,7 +68,7 @@ button:hover,
 }
 
 .square,
-.menu button,
+.menu-btn,
 .scoreboard {
   border-radius: 10px;
 }
@@ -82,6 +77,15 @@ img {
   height: 50px;
   width: 50px;
   border-radius: 50%;
+  box-shadow: rgba(0, 0, 0, 0.4) 0 2px 4px, rgba(0, 0, 0, 0.3) 0 7px 13px -3px;
+}
+
+.outline-red {
+  outline: 3px solid var(--red);
+}
+
+.outline-turquoise {
+  outline: 3px solid var(--turquoise);
 }
 
 /*
@@ -153,6 +157,7 @@ body {
 
 .turn-indicator p {
   padding-left: 5px;
+  font-weight: 600;
 
   animation: 0.5s ease-in-out turn-player-animation;
 }
@@ -164,14 +169,18 @@ body {
 .menu button {
   background-color: var(--gray);
   color: white;
-  height: 100%;
-  width: 100%;
-  padding-left: 10%;
   font-size: 0.8rem;
 
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.menu-btn {
+  box-shadow: rgba(0, 0, 0, 0.4) 0 2px 4px, rgba(0, 0, 0, 0.3) 0 7px 13px -3px;
+  height: 100%;
+  width: 100%;
+  padding-left: 10%;
 }
 
 .menu p {
@@ -183,21 +192,46 @@ body {
   padding-right: 10%;
 }
 
+@keyframes dropDown {
+  0% {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
 .pop-out-menu {
   position: absolute;
+  color: white;
+  background-color: var(--gray);
   outline: 1px solid rgba(211, 211, 211, 0.4);
   width: 100%;
   margin-top: 5px;
+  border-radius: 10px;
   z-index: 1;
-  background-color: var(--gray);
-  color: white;
+  box-shadow: rgba(0, 0, 0, 0.4) 0 2px 4px, rgba(0, 0, 0, 0.3) 0 7px 13px -3px;
+  animation: dropDown 0.2s ease-in-out forwards;
 }
 
 #reset-game,
 #new-round {
-  margin: 10px 0;
-  background-color: transparent;
-  border-radius: 0;
+  margin: 5px;
+  padding: 5px;
+
+  background-image: radial-gradient(circle, #3cc4bf, #2e4756);
+  background-size: 0% 3px;
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  transition: background-size 0.3s ease-in-out;
+}
+
+#reset-game:hover,
+#new-round:hover {
+  background-size: 100% 3px;
 }
 
 .square {
@@ -255,6 +289,18 @@ Modal styles
 ============
 */
 
+@keyframes modals-pop-out {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
 .modal {
   position: fixed;
   width: 100%;
@@ -272,7 +318,14 @@ Modal styles
   max-width: 300px;
   height: 200px;
   background-color: var(--gray);
-  border: 1px solid var(--turquoise);
+  box-shadow: rgba(0, 0, 0, 0.4) 0 2px 4px, rgba(0, 0, 0, 0.3) 0 7px 13px -3px;
+
+  background-image: radial-gradient(circle, #3cc4bf, #2e4756);
+  background-size: 90% 3px;
+  background-repeat: no-repeat;
+  background-position: center bottom;
+
+  animation: modals-pop-out 0.3s ease-in-out;
 
   display: flex;
   flex-direction: column;
@@ -288,7 +341,7 @@ Modal styles
 }
 
 .modal-contents button {
-  background-color: #3cc4bf;
+  background-color: var(--turquoise);
   border-radius: 5px;
   font-size: 16px;
   padding: 10px;
@@ -297,14 +350,14 @@ Modal styles
 
 /*
 ================
-Selection Styles
+Selection Screen Styles
 ================
 */
 
 .character-selection-screen {
   background-color: rgba(0, 0, 0, 0.6);
   position: fixed;
-  z-index: 100;
+  z-index: 2;
   height: 100%;
   width: 100%;
 
@@ -318,8 +371,15 @@ Selection Styles
   max-width: 400px;
   height: 200px;
   background-color: var(--gray);
-  border: 1px solid var(--turquoise);
   border-radius: 20px;
+  box-shadow: rgba(0, 0, 0, 0.4) 0 2px 4px, rgba(0, 0, 0, 0.3) 0 7px 13px -3px;
+
+  animation: modals-pop-out 0.3s ease-in-out;
+
+  background-image: radial-gradient(circle, #3cc4bf, #2e4756);
+  background-size: 90% 3px;
+  background-repeat: no-repeat;
+  background-position: center bottom;
 
   display: flex;
   flex-direction: column;
@@ -372,10 +432,27 @@ Selection Styles
   height: 50px;
 }
 
+.p1-square img {
+  outline: 2px solid var(--turquoise);
+}
+
+.p2-square img {
+  outline: 2px solid var(--red);
+}
+
 .p1-square p,
 .p2-square p {
-  background-color: rgba(253, 252, 252, 0.6);
-  padding: 2px;
+  box-shadow: rgba(0, 0, 0, 0.4) 0 2px 4px, rgba(0, 0, 0, 0.3) 0 7px 13px -3px;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.p1-square p {
+  background-color: var(--turquoise);
+}
+
+.p2-square p {
+  background-color: var(--red);
 }
 
 .p1-square ul,
@@ -386,6 +463,8 @@ Selection Styles
   background-color: #2e4756;
   outline: 1px solid var(--dark-gray);
   outline-offset: -1px;
+  border-radius: 15px;
+  animation: dropDown 0.3s ease-in-out;
   overflow-y: scroll;
   scrollbar-width: none;
   -ms-overflow-style: none;
