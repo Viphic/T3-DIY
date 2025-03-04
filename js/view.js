@@ -23,9 +23,9 @@ export default class View {
     this.$.characterSelectionScreen = this.#qs(
       '[data-id="character-selection-screen"]'
     );
-    this.$.p1Select = this.#qs('[data-id="p1-selection"]');
+    this.$.p1Square = this.#qs('[data-id="p1-square"]');
     this.$.p1CharMenu = this.#qs('[data-id="p1-character-menu"]');
-    this.$.p2Select = this.#qs('[data-id="p2-selection"]');
+    this.$.p2Square = this.#qs('[data-id="p2-square"]');
     this.$.p2CharMenu = this.#qs('[data-id="p2-character-menu"]');
     this.$.startButton = this.#qs('[data-id="start-button"]');
     this.$.p1SelectedCharacter = this.#qs('[data-id="p1-current-character"]');
@@ -45,14 +45,14 @@ export default class View {
       this.$.modal.classList.add("hidden");
     });
 
-    this.$.p1Select.addEventListener("click", (event) => {
+    this.$.p1Square.addEventListener("click", (event) => {
       this.$.p1CharMenu.classList.toggle("hidden");
-      this.$.p1Select.classList.toggle("character-selection-outline");
+      this.$.p1Square.classList.toggle("p1-square-outline");
     });
 
-    this.$.p2Select.addEventListener("click", (event) => {
+    this.$.p2Square.addEventListener("click", (event) => {
       this.$.p2CharMenu.classList.toggle("hidden");
-      this.$.p2Select.classList.toggle("character-selection-outline");
+      this.$.p2Square.classList.toggle("p2-square-outline");
     });
   }
 
@@ -127,6 +127,7 @@ export default class View {
 
       if (existingMove) {
         this.#placeIconInSquare(square, existingMove.player);
+        this.#animateIconInSquare(square, moves);
       }
     });
   }
@@ -136,6 +137,17 @@ export default class View {
     img.src = player.iconClass;
     img.classList.add(`outline-${player.colorClass}`);
     square.replaceChildren(img);
+  }
+
+  #animateIconInSquare(square, moves) {
+    const img = square.querySelector("img");
+    const lastMove = moves[moves.length - 1];
+
+    if (!img) return;
+
+    if (lastMove.squareId === +square.id) {
+      img.classList.add("placed");
+    }
   }
 
   #setTurnIndicator(player) {
@@ -190,10 +202,10 @@ export default class View {
 
   #closeCharacterMenu() {
     this.$.p1CharMenu.classList.add("hidden");
-    this.$.p1Select.classList.remove("character-selection-outline");
+    this.$.p1Square.classList.remove("p1-square-outline");
 
     this.$.p2CharMenu.classList.add("hidden");
-    this.$.p2Select.classList.remove("character-selection-outline");
+    this.$.p2Square.classList.remove("p2-square-outline");
   }
 
   #closeActionMenu() {

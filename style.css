@@ -28,18 +28,9 @@ body {
   background-color: var(--dark-gray);
 }
 
-button:hover,
-.square:hover {
-  cursor: pointer;
-  opacity: 80%;
-}
-
-.p1-square ul:hover,
-.p2-square ul:hover,
-.menu-btn:hover,
-.pop-out-menu:hover,
-.square:hover {
-  outline: 1px solid var(--turquoise);
+button {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 .shadow {
@@ -50,21 +41,12 @@ button:hover,
   outline: 1px solid rgba(211, 211, 211, 0.4);
 }
 
-.character-selection-outline {
-  outline: 1px solid var(--dark-gray);
-  outline-offset: -1px;
-}
-
 .turquoise {
   color: var(--turquoise);
 }
 
 .red {
   color: var(--red);
-}
-
-.hidden {
-  display: none !important;
 }
 
 .square,
@@ -128,7 +110,7 @@ body {
   }
 
   25% {
-    transform: scale(1.4);
+    transform: scale(1.2);
   }
 
   100% {
@@ -139,6 +121,7 @@ body {
 .turn-indicator img {
   font-size: 30px;
   margin-left: 10px;
+  z-index: 3;
 
   animation: 0.5s ease-in-out turn-icon-animation;
 }
@@ -215,11 +198,16 @@ body {
   z-index: 1;
   box-shadow: rgba(0, 0, 0, 0.4) 0 2px 4px, rgba(0, 0, 0, 0.3) 0 7px 13px -3px;
   animation: dropDown 0.2s ease-in-out forwards;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 #reset-game,
 #new-round {
-  margin: 5px;
+  margin: 5px 2px;
   padding: 5px;
 
   background-image: radial-gradient(circle, #3cc4bf, #2e4756);
@@ -229,9 +217,8 @@ body {
   transition: background-size 0.3s ease-in-out;
 }
 
-#reset-game:hover,
-#new-round:hover {
-  background-size: 100% 3px;
+#new-round {
+  margin-top: 0px;
 }
 
 .square {
@@ -256,7 +243,7 @@ body {
   }
 }
 
-.square:hover img {
+.square img.placed {
   animation: 0.5s ease-in-out square-img-animation;
 }
 
@@ -306,6 +293,7 @@ Modal styles
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.6);
+  z-index: 5;
 
   display: flex;
   justify-content: center;
@@ -357,7 +345,7 @@ Selection Screen Styles
 .character-selection-screen {
   background-color: rgba(0, 0, 0, 0.6);
   position: fixed;
-  z-index: 2;
+  z-index: 5;
   height: 100%;
   width: 100%;
 
@@ -402,28 +390,19 @@ Selection Screen Styles
   width: 150px;
   height: 80px;
   margin: 5px;
+  z-index: 2;
 }
 
-@keyframes border-animation {
-  0% {
-    outline: 1px solid var(--dark-gray);
-    outline-offset: -1px;
-  }
-
-  100% {
-    outline: 1px solid var(--turquoise);
-    outline-offset: -1px;
-  }
+.p1-square-outline,
+.p1-square ul {
+  outline: 1px solid var(--turquoise);
+  outline-offset: -1px;
 }
 
-.p1-square:hover,
-.p2-square:hover {
-  cursor: pointer;
-  box-shadow: rgba(0, 0, 0, 0.4) 0 2px 4px, rgba(0, 0, 0, 0.3) 0 7px 13px -3px;
-  animation-name: border-animation;
-  animation-duration: 0.6s;
-  animation-fill-mode: forwards;
-  animation-timing-function: ease-in-out;
+.p2-square-outline,
+.p2-square ul {
+  outline: 1px solid var(--red);
+  outline-offset: -1px;
 }
 
 .p1-square img,
@@ -461,7 +440,6 @@ Selection Screen Styles
   height: 200px;
   width: 100%;
   background-color: #2e4756;
-  outline: 1px solid var(--dark-gray);
   outline-offset: -1px;
   border-radius: 15px;
   animation: dropDown 0.3s ease-in-out;
@@ -540,8 +518,8 @@ Selection Screen Styles
 
 .fa-v,
 .fa-s {
-  font-size: 1.4rem;
-  margin: 2px;
+  font-size: 1.2rem;
+  margin: 1px;
 }
 
 .start-button {
@@ -549,15 +527,24 @@ Selection Screen Styles
   padding: 10px 20px;
   border-radius: 5px;
   background-color: var(--turquoise);
+  z-index: 1;
   color: white;
   align-self: center;
 }
 
 /*
-================
-Media breakpoint
-================
+=================
+Media breakpoints
+=================
 */
+
+@media (min-width: 400px) {
+  .fa-v,
+  .fa-s {
+    font-size: 1.4rem;
+    margin: 2px;
+  }
+}
 
 @media (min-width: 768px) {
   .grid {
@@ -571,4 +558,112 @@ Media breakpoint
     width: 70px;
     height: 70px;
   }
+  .pop-out-menu {
+    display: block;
+  }
+
+  #reset-game,
+  #new-round {
+    margin: 5px 10px;
+  }
+
+  .p1-square-outline,
+  .p2-square-outline,
+  .p1-square ul,
+  .p2-square ul {
+    outline: 1px solid var(--dark-gray);
+  }
+
+  /*
+  =================
+  ANIMATIONS FOR PC
+  =================
+  */
+
+  @keyframes border-animation-p1-square {
+    0% {
+      outline: 2px solid var(--dark-gray);
+      outline-offset: -1px;
+    }
+
+    100% {
+      outline: 2px solid var(--turquoise);
+      outline-offset: -1px;
+    }
+  }
+
+  @keyframes border-animation-p2-square {
+    0% {
+      outline: 2px solid var(--dark-gray);
+      outline-offset: -1px;
+    }
+
+    100% {
+      outline: 2px solid var(--red);
+      outline-offset: -1px;
+    }
+  }
+
+  /*
+  ====================
+  HOVER EFFECTS FOR PC
+  ====================
+  */
+
+  .p1-square:hover,
+  .p2-square:hover {
+    cursor: pointer;
+    box-shadow: rgba(0, 0, 0, 0.4) 0 2px 4px, rgba(0, 0, 0, 0.3) 0 7px 13px -3px;
+    animation-duration: 0.6s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-in-out;
+  }
+
+  .p1-square:hover {
+    animation-name: border-animation-p1-square;
+  }
+
+  .p2-square:hover {
+    animation-name: border-animation-p2-square;
+  }
+
+  #reset-game:hover,
+  #new-round:hover {
+    background-size: 100% 3px;
+  }
+
+  button:hover,
+  .square:hover {
+    cursor: pointer;
+  }
+
+  .modal button:hover,
+  .start-button:hover {
+    background-color: teal;
+  }
+
+  .menu-btn:hover,
+  .pop-out-menu:hover,
+  .square:hover {
+    outline: 1px solid var(--turquoise);
+  }
+
+  .p1-square ul:hover,
+  .p1-square img {
+    outline: 2px solid var(--turquoise);
+  }
+
+  .p2-square ul:hover,
+  .p2-square img {
+    outline: 2px solid var(--red);
+  }
+}
+
+/*
+============
+!important
+============
+*/
+.hidden {
+  display: none;
 }
